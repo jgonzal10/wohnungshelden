@@ -4,7 +4,7 @@ package de.wohnungshelden.applications.applications;
 
 public record Application(        
     String email,
-    String firstname,
+    String firstName,
     String lastName,
     Long propertyId
     // LocalDate creationTimestamp
