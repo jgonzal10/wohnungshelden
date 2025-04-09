@@ -26,13 +26,38 @@ public class Application{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
+
+    // Fields set via UI
     private String email;
+    @Column
+    private String salutation; // ENUM
+
     @Column
     private String firstName;
     @Column(nullable = false)
     private String lastName;
+    @Column
+    private String userComment;
+
+
+    @Column
+    private Integer numberOfPersons;
+    @Column
+    private Boolean wbsPresent;
+    @Column
+    private LocalDate erliestMoveInDate;
+    @Column
+    private String pets; 
+    @Column
+    private String status; // CREATED
+    @Column
+    private String applicantComment; 
+
+    @Column
+    private String creationSource; // ENUM
     @Column(columnDefinition = "serial", updatable = false, insertable = false)
     Long propertyId;
-    // LocalDate creationTimestamp
+    @Column
+    private LocalDate creationTimestamp;
 
 }

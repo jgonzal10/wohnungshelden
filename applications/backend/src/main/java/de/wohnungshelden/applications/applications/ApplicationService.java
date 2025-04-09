@@ -21,14 +21,10 @@ public class ApplicationService {
     }
     
     public Application createApplication(Application application) {
-        System.out.println("createApplication");
-        System.out.println(application);
         return applicationRepository.save(application);
     }
     
     public Application getApplicationByPropertyId(Long propertyId) {
-        System.out.println("getApplicationByPropertyId");
-        System.out.println(propertyId);
         return applicationRepository.findByPropertyId(propertyId).orElse(null);
     }
 
