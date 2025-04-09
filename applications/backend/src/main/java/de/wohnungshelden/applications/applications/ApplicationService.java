@@ -31,4 +31,11 @@ public class ApplicationService {
         System.out.println(propertyId);
         return applicationRepository.findByPropertyId(propertyId).orElse(null);
     }
+
+    public List<Application> searchApplications(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return applicationRepository.findAll();
+        }
+        return applicationRepository.searchByKeyword(keyword.trim());
+    }
 }
