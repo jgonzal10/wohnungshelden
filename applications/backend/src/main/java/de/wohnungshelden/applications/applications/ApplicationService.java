@@ -1,8 +1,34 @@
 package de.wohnungshelden.applications.applications;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
+@Transactional
 public class ApplicationService {
     
+    private final ApplicationRepository applicationRepository;
+    
+    public ApplicationService(ApplicationRepository applicationRepository) {
+        this.applicationRepository = applicationRepository;
+    }
+
+    public List<Application> getAllApplications() {
+        return applicationRepository.findAll();
+    }
+    
+    public Application createApplication(Application application) {
+        System.out.println("createApplication");
+        System.out.println(application);
+        return applicationRepository.save(application);
+    }
+    
+    public Application getApplicationByPropertyId(Long propertyId) {
+        System.out.println("getApplicationByPropertyId");
+        System.out.println(propertyId);
+        return applicationRepository.findByPropertyId(propertyId).orElse(null);
+    }
 }

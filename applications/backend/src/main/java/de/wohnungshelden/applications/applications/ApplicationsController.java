@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,27 +20,26 @@ import jakarta.validation.Valid;
 @Slf4j
 @RequestMapping(path = "/applications")
 public class ApplicationsController {
-    private final ApplicationRepository applicationRepository;
+    private final ApplicationService applicationService;
 
-    public ApplicationsController(ApplicationRepository applicationRepository){
-        this.applicationRepository = applicationRepository;
+    public ApplicationsController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
     }
 
     @PostMapping
-    public Application create(@RequestBody @Valid Application application) {
-        return applicationRepository.create(application);
+    public ResponseEntity<Application> create(@RequestBody @Valid Application application) {
+        Application createdApplication = applicationService.createApplication(application);
+        return new ResponseEntity<>(createdApplication, HttpStatus.CREATED);
     }
-    
-    @GetMapping(path ="/all")
+
+    @GetMapping(path = "/all")
     public List<Application> getApplications() {
-        return applicationRepository.findAll();
+        return applicationService.getAllApplications();
     }
 
-    @GetMapping(path ="/{id}")
+    @GetMapping(path = "/{id}")
     public Application getApplicationByPropertyId(@PathVariable("id") Long propertyId) {
-        return applicationRepository.findByPropertyId(propertyId).orElseThrow(() -> new NoSuchElementException("Application with propertyId " + propertyId + " not found"));
+        return applicationService.getApplicationByPropertyId(propertyId);
     }
-
-
 
 }
