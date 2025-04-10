@@ -2,20 +2,19 @@ package de.wohnungshelden.applications.applications;
 
 import java.time.LocalDate;
 
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// import java.time.LocalDate;
 @Data
 @Entity
 @NoArgsConstructor
@@ -28,12 +27,15 @@ public class Application{
     @Column(nullable = false)
 
     // Fields set via UI
+    @NotBlank(groups = {UiValidationGroup.class, PortalValidationGroup.class})
     private String email;
     @Column
-    private String salutation; // ENUM
+    private String salutation; // ENUM MR, MRS
 
+    @NotBlank(groups = {UiValidationGroup.class})
     @Column
     private String firstName;
+    @NotBlank(groups = {UiValidationGroup.class, PortalValidationGroup.class})
     @Column(nullable = false)
     private String lastName;
     @Column
@@ -49,15 +51,15 @@ public class Application{
     @Column
     private String pets; 
     @Column
-    private String status; // CREATED
+    private String status = "CREATED"; // CREATED, INVITED , DECLINED
     @Column
     private String applicantComment; 
 
     @Column
     private String creationSource; // ENUM
-    @Column(columnDefinition = "serial", updatable = false, insertable = false)
-    Long propertyId;
-    @Column
+    @Column(nullable = false)
+    Long propertyId= 1L; // Just for the demo I will consider One Property
+    @CreationTimestamp
     private LocalDate creationTimestamp;
 
 }

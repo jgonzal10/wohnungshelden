@@ -16,16 +16,16 @@ public class ApplicationService {
         this.applicationRepository = applicationRepository;
     }
 
-    public List<Application> getAllApplications() {
-        return applicationRepository.findAll();
+    public List<Application> getAllApplicationsByProperty(Long propertyId) {
+        return applicationRepository.findByPropertyIdOrderByCreationTimestampDesc(propertyId);
     }
     
     public Application createApplication(Application application) {
         return applicationRepository.save(application);
     }
     
-    public Application getApplicationByPropertyId(Long propertyId) {
-        return applicationRepository.findByPropertyId(propertyId).orElse(null);
+    public Application getApplicationByIdAndPropertyId(int applicationId,Long propertyId) {
+        return applicationRepository.findByIdAndPropertyId(applicationId,propertyId).orElse(null);
     }
 
     public List<Application> searchApplications(String keyword) {
@@ -33,5 +33,10 @@ public class ApplicationService {
             return applicationRepository.findAll();
         }
         return applicationRepository.searchByKeyword(keyword.trim());
+    }
+
+
+    public List<Application> all() {
+        return applicationRepository.findAll();
     }
 }

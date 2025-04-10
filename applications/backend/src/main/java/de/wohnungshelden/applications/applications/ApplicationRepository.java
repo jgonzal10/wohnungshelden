@@ -10,9 +10,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Integer> {
-    Optional<Application> findByPropertyId(Long propertyId);
+    List<Application> findByPropertyIdOrderByCreationTimestampDesc(Long propertyId);
+
+    Optional<Application> findByIdAndPropertyId(int id,Long propertyId);
 
     @Query("SELECT a FROM Application a WHERE " +
             "LOWER(CONCAT(a.email, ' ', a.firstName, ' ', a.lastName)) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Application> searchByKeyword(@Param("keyword") String keyword);
+
+
+List<Application> findAllBy();
+
 }
