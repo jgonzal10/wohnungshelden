@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "8eda094b-5033-49da-a2f7-d6be91f68dc1",
+		"name": "applications",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9043118"
+	},
+	"item": [
+		{
+			"name": "Get Applications",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/property/{{propertyId}}/search?keywords=je",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"property",
+						"{{propertyId}}",
+						"search"
+					],
+					"query": [
+						{
+							"key": "keywords",
+							"value": "je"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Application PORTAL",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Request-Source",
+						"value": "PORTAL",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"suarez@email.com\",\r\n    \"lastName\":\"suarez\",\r\n    \"creationSource\": \"PORTAL\",\r\n    \"salutation\":\"MR\",\r\n    \"numberOfPersons\":2,\r\n    \"wbsPresent\":true,\r\n    \"pets\":\"No pets allowed\",\r\n    \"applicantComment\":\"This is an applicant comment\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/portal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"portal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Application Ui",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Request-Source",
+						"value": "PORTAL",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"gonzalez@email.com\",\r\n    \"firstName\":\"Jenn\",\r\n    \"lastName\":\"Gonzalez\",\r\n    \"creationSource\": \"UI\",\r\n    \"salutation\":\"MRS\",\r\n    \"userComment\":\"This is a UI user comment\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/ui",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ui"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Application Second UI",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Request-Source",
+						"value": "PORTAL",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"wohnhungs@email.com\",\r\n    \"firstName\":\"Jann\",\r\n    \"lastName\":\"Schmith\",\r\n    \"creationSource\": \"UI\",\r\n    \"salutation\":\"MRS\",\r\n    \"userComment\":\"This is a UI user comment from Herr Smith\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/ui",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ui"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Application By Property Id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/property/{{propertyId}}/application/{{applicationId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"property",
+						"{{propertyId}}",
+						"application",
+						"{{applicationId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Applications by propertyId",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/property/{{propertyId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"property",
+						"{{propertyId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DECLINE APPLICATION",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/property/{{propertyId}}/application/{{applicationId}}/status?status=DECLINED",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"property",
+						"{{propertyId}}",
+						"application",
+						"{{applicationId}}",
+						"status"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "DECLINED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "INVITED APPLICATION",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/property/{{propertyId}}/application/{{applicationId}}/status?status=INVITED",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"property",
+						"{{propertyId}}",
+						"application",
+						"{{applicationId}}",
+						"status"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "INVITED"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
