@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Validated
 @RequestMapping(path = "/api")
-public class ApplicationsController {
+public class ApplicationController {
     private final ApplicationService applicationService;
 
-    public ApplicationsController(ApplicationService applicationService) {
+    public ApplicationController(ApplicationService applicationService) {
         this.applicationService = applicationService;
     }
 
@@ -47,13 +47,13 @@ public class ApplicationsController {
         return applicationService.getApplicationByIdAndPropertyId(applicationId, propertyId);
     }
 
-    @GetMapping("/property/{propertyId}/search")
+    @GetMapping(path ="/property/{propertyId}/search")
     public List<Application> searchApplications(@PathVariable("propertyId") Long propertyId,
             @RequestParam(required = false) String keywords) {
         return applicationService.searchApplications(propertyId, keywords);
     }
 
-    @PatchMapping("/property/{propertyId}/application/{applicationId}/status")
+    @PutMapping(path ="/property/{propertyId}/application/{applicationId}/status")
     public ResponseEntity<Void> updateStatus(
             @PathVariable("propertyId") Long propertyId,
             @PathVariable("applicationId") int applicationId,
@@ -63,7 +63,7 @@ public class ApplicationsController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/all")
+    @GetMapping(path ="/all")
     public List<Application> all() {
         return applicationService.all();
     }

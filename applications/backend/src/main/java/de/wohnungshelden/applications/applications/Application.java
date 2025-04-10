@@ -26,13 +26,13 @@ public class Application{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false)
 
     // Fields set via UI
+    @Column(nullable = false)
     @NotBlank(groups = {UiValidationGroup.class, PortalValidationGroup.class})
     private String email;
     @Column
-    private String salutation; // ENUM MR, MRS
+    private ApplicationSalutation salutation; // ENUM MR, MRS
 
     @NotBlank(groups = {UiValidationGroup.class})
     @Column
@@ -59,10 +59,63 @@ public class Application{
     private String applicantComment; 
 
     @Column
-    private String creationSource; // ENUM
+    private ApplicationCreationSource creationSource;
     @Column(nullable = false)
     Long propertyId= 1L; // Just for the demo I will consider One Property
     @CreationTimestamp
     private LocalDate creationTimestamp;
+
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSalutation(ApplicationSalutation salutation) {
+        this.salutation = salutation;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setUserComment(String userComment) {
+        this.userComment = userComment;
+    }
+
+    public void setNumberOfPersons(Integer numberOfPersons) {
+        this.numberOfPersons = numberOfPersons;
+    }
+
+    public void setWbsPresent(Boolean wbsPresent) {
+        this.wbsPresent = wbsPresent;
+    }
+
+    public void setEarliestMoveInDate(LocalDate earliestMoveInDate) {
+        this.earliestMoveInDate = earliestMoveInDate;
+    }
+
+    public void setPets(String pets) {
+        this.pets = pets;
+    }
+
+    public void setStatus(ApplicationStatus status) {
+        this.status = status;
+    }
+
+    public void setApplicantComment(String applicantComment) {
+        this.applicantComment = applicantComment;
+    }
+
+    public void setCreationSource(ApplicationCreationSource creationSource) {
+        this.creationSource = creationSource;
+    }
+
+    public void setPropertyId(Long propertyId) {
+        this.propertyId = propertyId;
+    }
 
 }
