@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,8 +52,9 @@ public class Application{
     private LocalDate earliestMoveInDate;
     @Column
     private String pets; 
+    @Enumerated(EnumType.STRING)
     @Column
-    private String status = "CREATED"; // CREATED, INVITED , DECLINED
+    private ApplicationStatus status = ApplicationStatus.CREATED; // CREATED, INVITED , DECLINED
     @Column
     private String applicantComment; 
 

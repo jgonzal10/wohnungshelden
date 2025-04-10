@@ -2,8 +2,11 @@ package de.wohnungshelden.applications.applications;
 
 import java.util.List;
 
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import lombok.RequiredArgsConstructor;
 
 
 @Service
@@ -34,6 +37,21 @@ public class ApplicationService {
         return applicationRepository.searchByPropertyIdAndKeyword(propertyId,keyword.trim());
     }
 
+    public void updateApplicationStatus(int id, Long propertyId, String statusStr) {
+        ApplicationStatus status;
+        try {
+            status = ApplicationStatus.valueOf(statusStr.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new Error("Invalid Status");
+        }
+
+    
+        int updated = applicationRepository.updateStatus(id, propertyId, status);
+        
+        if (updated == 0) {
+            throw new Error("Status update failed");
+        }
+    }
 
     public List<Application> all() {
         return applicationRepository.findAll();

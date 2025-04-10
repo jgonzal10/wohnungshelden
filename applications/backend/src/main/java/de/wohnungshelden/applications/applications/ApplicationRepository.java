@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import jakarta.transaction.Transactional;
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Integer> {
@@ -27,7 +30,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
     List<Application> searchByPropertyIdAndKeyword2(@Param("propertyId") Long propertyId,
             @Param("keyword") String keyword);
 
-            @Query("SELECT a FROM Application a WHERE " +
+    @Query("SELECT a FROM Application a WHERE " +
             "a.propertyId = :propertyId AND " +
             "(LOWER(a.email) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(a.firstName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
@@ -44,6 +47,15 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
     List<Application> searchByPropertyIdAndKeyword(
             @Param("propertyId") Long propertyId,
             @Param("keyword") String keyword);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Application a SET a.status = :status " +
+            "WHERE a.id = :id AND a.propertyId = :propertyId")
+    int updateStatus(
+            @Param("id") int id,
+            @Param("propertyId") Long propertyId,
+            @Param("status") ApplicationStatus status);
 
     List<Application> findAllBy();
 

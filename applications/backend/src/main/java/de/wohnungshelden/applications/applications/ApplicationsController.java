@@ -4,9 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,13 +42,25 @@ public class ApplicationsController {
     }
 
     @GetMapping(path = "/property/{propertyId}/application/{applicationId}")
-    public Application getApplicationById(@PathVariable("propertyId") Long propertyId,@PathVariable("applicationId") int applicationId) {
-        return applicationService.getApplicationByIdAndPropertyId(applicationId,propertyId);
+    public Application getApplicationById(@PathVariable("propertyId") Long propertyId,
+            @PathVariable("applicationId") int applicationId) {
+        return applicationService.getApplicationByIdAndPropertyId(applicationId, propertyId);
     }
 
-    @GetMapping("/property/{propertyId}/search") 
-    public List<Application> searchApplications(@PathVariable("propertyId") Long propertyId, @RequestParam(required = false) String keywords) {
-        return applicationService.searchApplications(propertyId,keywords);
+    @GetMapping("/property/{propertyId}/search")
+    public List<Application> searchApplications(@PathVariable("propertyId") Long propertyId,
+            @RequestParam(required = false) String keywords) {
+        return applicationService.searchApplications(propertyId, keywords);
+    }
+
+    @PatchMapping("/property/{propertyId}/application/{applicationId}/status")
+    public ResponseEntity<Void> updateStatus(
+            @PathVariable("propertyId") Long propertyId,
+            @PathVariable("applicationId") int applicationId,
+            @RequestParam String status) {
+
+        applicationService.updateApplicationStatus(applicationId, propertyId, status);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/all")
