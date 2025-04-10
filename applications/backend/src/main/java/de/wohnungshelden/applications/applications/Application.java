@@ -47,7 +47,7 @@ public class Application{
     @Column
     private Boolean wbsPresent;
     @Column
-    private LocalDate erliestMoveInDate;
+    private LocalDate earliestMoveInDate;
     @Column
     private String pets; 
     @Column

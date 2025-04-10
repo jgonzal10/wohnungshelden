@@ -45,9 +45,9 @@ public class ApplicationsController {
         return applicationService.getApplicationByIdAndPropertyId(applicationId,propertyId);
     }
 
-    @GetMapping("/search")
-    public List<Application> searchApplications(@RequestParam(required = false) String keywords) {
-        return applicationService.searchApplications(keywords);
+    @GetMapping("/property/{propertyId}/search") 
+    public List<Application> searchApplications(@PathVariable("propertyId") Long propertyId, @RequestParam(required = false) String keywords) {
+        return applicationService.searchApplications(propertyId,keywords);
     }
 
     @GetMapping("/all")

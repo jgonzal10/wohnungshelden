@@ -15,24 +15,23 @@ public class ApplicationService {
     public ApplicationService(ApplicationRepository applicationRepository) {
         this.applicationRepository = applicationRepository;
     }
+    public Application createApplication(Application application) {
+        return applicationRepository.save(application);
+    }
 
     public List<Application> getAllApplicationsByProperty(Long propertyId) {
         return applicationRepository.findByPropertyIdOrderByCreationTimestampDesc(propertyId);
-    }
-    
-    public Application createApplication(Application application) {
-        return applicationRepository.save(application);
     }
     
     public Application getApplicationByIdAndPropertyId(int applicationId,Long propertyId) {
         return applicationRepository.findByIdAndPropertyId(applicationId,propertyId).orElse(null);
     }
 
-    public List<Application> searchApplications(String keyword) {
+    public List<Application> searchApplications(Long propertyId,String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
             return applicationRepository.findAll();
         }
-        return applicationRepository.searchByKeyword(keyword.trim());
+        return applicationRepository.searchByPropertyIdAndKeyword(propertyId,keyword.trim());
     }
 
 
