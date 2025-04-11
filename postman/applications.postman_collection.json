@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Get Applications",
+			"name": "Step 5. Get Applications",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -30,12 +30,12 @@
 			"response": []
 		},
 		{
-			"name": "Search",
+			"name": "Step 8. Search",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/property/{{propertyId}}/search?keywords=je",
+					"raw": "http://localhost:8080/api/property/{{propertyId}}/search?keywords=jen",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -50,7 +50,7 @@
 					"query": [
 						{
 							"key": "keywords",
-							"value": "je"
+							"value": "jen"
 						}
 					]
 				}
@@ -58,7 +58,7 @@
 			"response": []
 		},
 		{
-			"name": "Create Application PORTAL",
+			"name": "Step 3. Create Application PORTAL",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -81,7 +81,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/portal",
+					"raw": "http://localhost:8080/api/portal/property/{{propertyId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -89,14 +89,56 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"portal"
+						"portal",
+						"property",
+						"{{propertyId}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Create Application Ui",
+			"name": "Step 4. Second Portal Application",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Request-Source",
+						"value": "PORTAL",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"suarez@email.com\",\r\n    \"lastName\":\"suarez\",\r\n    \"creationSource\": \"PORTAL\",\r\n    \"salutation\":\"MR\",\r\n    \"numberOfPersons\":2,\r\n    \"wbsPresent\":true,\r\n    \"pets\":\"No pets allowed\",\r\n    \"applicantComment\":\"This is an applicant comment\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/portal/property/{{secondpropertyId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"portal",
+						"property",
+						"{{secondpropertyId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step1. Create Application Ui",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -119,7 +161,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/ui",
+					"raw": "http://localhost:8080/api/ui/property/{{propertyId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -127,14 +169,16 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"ui"
+						"ui",
+						"property",
+						"{{propertyId}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Create Application Second UI",
+			"name": "Step 2. Create Application Second UI",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -157,7 +201,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/ui",
+					"raw": "http://localhost:8080/api/ui/property/{{secondpropertyId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -165,14 +209,16 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"ui"
+						"ui",
+						"property",
+						"{{secondpropertyId}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get Application By Property Id",
+			"name": "Step 7 .Application By Property Id",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -198,7 +244,7 @@
 			"response": []
 		},
 		{
-			"name": "Applications by propertyId",
+			"name": "Step 6 .Applications by propertyId",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -222,7 +268,7 @@
 			"response": []
 		},
 		{
-			"name": "DECLINE APPLICATION",
+			"name": "Step 9. Decline application",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -255,7 +301,7 @@
 			"response": []
 		},
 		{
-			"name": "INVITED APPLICATION",
+			"name": "10. Invited application",
 			"request": {
 				"auth": {
 					"type": "noauth"

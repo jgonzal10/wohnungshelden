@@ -67,7 +67,7 @@ public class ApplicationControllerTest {
         application1.setEmail("suarez@email.com");
         application1.setFirstName("Jane");
         application1.setLastName("Test");
-        when(applicationService.createApplication(any(Application.class))).thenReturn(application1);
+        when(applicationService.createApplication(1l,any(Application.class))).thenReturn(application1);
 
         mockMvc.perform(post("/api/portal")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +87,7 @@ public class ApplicationControllerTest {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.email").value("suarez@email.com"));
 
-        verify(applicationService).createApplication(any(Application.class));
+        verify(applicationService).createApplication(1L,any(Application.class));
     }
 
 

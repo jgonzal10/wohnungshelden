@@ -61,7 +61,7 @@ public class Application{
     @Column
     private ApplicationCreationSource creationSource;
     @Column(nullable = false)
-    Long propertyId= 1L; // Just for the demo I will consider One Property
+    Long propertyId;
     @CreationTimestamp
     private LocalDate creationTimestamp;
 

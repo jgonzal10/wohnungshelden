@@ -26,14 +26,15 @@ public class ApplicationController {
         this.applicationService = applicationService;
     }
 
-    @PostMapping("/portal")
-    public Application createFromPortal(@Validated(PortalValidationGroup.class) @RequestBody Application application) {
-        return applicationService.createApplication(application);
+    //Portal auth
+    @PostMapping("/portal/property/{propertyId}")
+    public Application createFromPortal(@PathVariable("propertyId") Long propertyId, @Validated(PortalValidationGroup.class) @RequestBody Application application) {
+        return applicationService.createApplication(propertyId,application);
     }
 
-    @PostMapping("/ui")
-    public Application createFromUi(@Validated(UiValidationGroup.class) @RequestBody Application application) {
-        return applicationService.createApplication(application);
+    @PostMapping("/ui/property/{propertyId}")
+    public Application createFromUi(@PathVariable("propertyId") Long propertyId,@Validated(UiValidationGroup.class) @RequestBody Application application) {
+        return applicationService.createApplication(propertyId,application);
     }
 
     @GetMapping(path = "/property/{propertyId}")

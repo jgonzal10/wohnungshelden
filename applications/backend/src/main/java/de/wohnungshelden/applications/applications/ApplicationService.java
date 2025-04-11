@@ -16,7 +16,8 @@ public class ApplicationService {
     public ApplicationService(ApplicationRepository applicationRepository) {
         this.applicationRepository = applicationRepository;
     }
-    public Application createApplication(Application application) {
+    public Application createApplication(Long propertyId,Application application) {
+        application.setPropertyId(propertyId);
         return applicationRepository.save(application);
     }
 
